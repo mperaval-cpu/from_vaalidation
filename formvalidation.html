@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form 2026</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; padding: 20px; }
+        .container { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 450px; }
+        h2 { text-align: center; color: #333; }
+        .form-group { margin-bottom: 15px; position: relative; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input[type="text"], input[type="email"], input[type="password"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .gender-group { margin: 10px 0; }
+        .error-msg { color: red; font-size: 0.85em; margin-top: 4px; min-height: 1.2em; }
+        button { width: 100%; padding: 12px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        button:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Register</h2>
+    <form id="regForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Enter full name">
+            <div id="nameError" class="error-msg"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="example@domain.com">
+            <div id="emailError" class="error-msg"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="At least 8 characters">
+            <div id="passError" class="error-msg"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" placeholder="Repeat password">
+            <div id="confirmError" class="error-msg"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input type="text" id="mobile" placeholder="10-digit number">
+            <div id="mobileError" class="error-msg"></div>
+        </div>
+
+        <div class="gender-group">
+            <label>Gender</label>
+            <input type="radio" name="gender" value="Male"> Male
+            <input type="radio" name="gender" value="Female"> Female
+            <input type="radio" name="gender" value="Other"> Other
+            <div id="genderError" class="error-msg"></div>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" id="terms"> I accept the Terms & Conditions
+            <div id="termsError" class="error-msg"></div>
+        </div>
+
+        <button type="submit">Register Now</button>
+    </form>
+</div>
+
+<script>
+document.getElementById('regForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let isValid = true;
+
+    document.querySelectorAll('.error-msg').forEach(el => el.innerText = "");
+
+    
+    const name = document.getElementById('name').value.trim();
+    if (name === "") {
+        document.getElementById('nameError').innerText = "Name is required.";
+        isValid = false;
+    }
+
+    const email = document.getElementById('email').value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        document.getElementById('emailError').innerText = "Enter a valid email format.";
+        isValid = false;
+    }
+
+    const password = document.getElementById('password').value;
+    if (password.length < 8) {
+        document.getElementById('passError').innerText = "Password must be at least 8 characters.";
+        isValid = false;
+    }
+
+
+    const confirmPass = document.getElementById('confirmPassword').value;
+    if (confirmPass !== password || confirmPass === "") {
+        document.getElementById('confirmError').innerText = "Passwords do not match.";
+        isValid = false;
+    }
+
+    const mobile = document.getElementById('mobile').value.trim();
+    const mobileRegex = /^\d{10}$/;
+    if (!mobileRegex.test(mobile)) {
+        document.getElementById('mobileError').innerText = "Enter a valid 10-digit number.";
+        isValid = false;
+    }
+
+  
+    const gender = document.querySelector('input[name="gender"]:checked');
+    if (!gender) {
+        document.getElementById('genderError').innerText = "Please select a gender.";
+        isValid = false;
+    }
+
+    const terms = document.getElementById('terms').checked;
+    if (!terms) {
+        document.getElementById('termsError').innerText = "You must accept the terms.";
+        isValid = false;
+    }
+
+    if (isValid) {
+        alert("Registration Successful!");
+        // Proceed with form submission
+    }
+});
+</script>
+
+</body>
+</html>
